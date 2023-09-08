@@ -1,9 +1,3 @@
-class User < ApplicationRecord
-  def full_name
-    [first_name, last_name].join(' ')
-  end
-end
-
 # == Schema Information
 #
 # Table name: users
@@ -14,7 +8,6 @@ end
 #  first_name :string
 #  image      :string
 #  last_name  :string
-#  level      :integer
 #  username   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -23,3 +16,9 @@ end
 #
 #  unique_usernames  (username) UNIQUE
 #
+class User < ApplicationRecord
+  def full_name
+    [first_name, last_name].join(' ')
+  end
+end
+
