@@ -66,3 +66,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem "shadcn-ui", "~> 0.0.5"
