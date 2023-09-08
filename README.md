@@ -1,24 +1,5 @@
-# README
+# M11 App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application will be responsible for creating balanced soccer teams in the future. It is expected to support multiple organizations, and members can belong to one or many of these.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The purpose of this app is to generate balanced and exciting matches.
