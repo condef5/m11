@@ -1,0 +1,51 @@
+<div class="w-full">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-2xl my-8">Create random team</h1>
+  </div>
+
+  <div class="grid grid-cols-2 gap-5">
+    <%= form_with(model: @random_team,  url: random_teams_path, method: :post) do |form| %>
+      <div class="form-group mb-4">
+        <%= form.number_field :players_per_team, class: "form-control max-w-[340px] w-full", placeholder: 'Player per team' %>
+      </div>
+
+      <div class="form-group">
+        <%= form.text_area :list, rows: 22, class: "form-control max-w-[340px] w-full" %>
+      </div>
+      <%= form.submit "Generate", class: "mt-4 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2   bg-primary text-primary-foreground hover:bg-primary/90" %>
+    <% end %>
+
+    <div>
+      <%# TODO: future ui with selects %>
+    </div>
+  </div>
+
+  <% if @random_team.teams.any? %>
+    <% colors = ["#FFB84C", "#98D8AA", "#393646", "tomato"]  %>
+
+    <div class='grid grid-cols-3 gap-5 mt-6'>
+      <% @random_team.teams.each_with_index do |team, index| %>
+        <div>
+          <h3 class='font-semibold mb-1' style="color: <%= colors[index] %>">
+            Team <%= index %>
+          </h3>
+          <ol class='ml-4' style='list-style: decimal'>
+            <% team.sort_by(&:level).reverse.each do |player| %>
+              <li><%= player.name %> - <%= player.level %></li>
+            <% end %>
+          </ol>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @random_team.missing_players.any? %>
+    <div class="mt-6">
+      <h3 class="font-semibold mb-1">Missing players</h3>
+      <ul>
+        <% @random_team.missing_players.each do |player| %>
+          <li><%= player %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
