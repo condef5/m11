@@ -10,7 +10,7 @@
       </div>
 
       <div class="form-group">
-        <%= form.text_area :list, rows: 22, class: "form-control max-w-[340px] w-full" %>
+        <%= form.text_area :list, class: "form-control max-w-[340px] w-full min-h-[360px]" %>
       </div>
       <%= form.submit "Generate", class: "mt-4 inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2   bg-primary text-primary-foreground hover:bg-primary/90" %>
     <% end %>
@@ -27,7 +27,7 @@
       <% @random_team.teams.each_with_index do |team, index| %>
         <div>
           <h3 class='font-semibold mb-1' style="color: <%= colors[index] %>">
-            Team <%= index %>
+            Team <%= index + 1 %> - <span class='font-normal'><%= team.sum(&:level) %></span>
           </h3>
           <ol class='ml-4' style='list-style: decimal'>
             <% team.sort_by(&:level).reverse.each do |player| %>
