@@ -8,6 +8,7 @@
 #  first_name :string
 #  image      :string
 #  last_name  :string
+#  uid        :string
 #  username   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
