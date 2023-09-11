@@ -19,7 +19,9 @@
     Discover innovative tools and features designed for true football aficionados.
   </span>
 
-  <div class="flex w-full items-center space-x-4 pb-8 pt-4 md:pb-10">
-    <%= render_button "Login" %>
-  </div>
+  <% if current_user %>
+    <%= render_button 'sign out', variant: :danger, as: :link, href: :sign_out %>
+  <% else %>
+    <%= render_button 'sign in with google', as: :link, href: :sign_in %>
+  <% end %>
 </section>
