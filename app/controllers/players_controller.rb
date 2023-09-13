@@ -3,9 +3,7 @@ class PlayersController < ApplicationController
 
   # GET /players or /players.json
   def index
-    @players = Player
-      .where("name LIKE ?", "%#{params[:filter]}%")
-      .order(updated_at: :desc)
+    @pagy, @players = pagy(players, items: 10)
   end
 
   # GET /players/1 or /players/1.json
@@ -68,5 +66,11 @@ class PlayersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def player_params
       params.require(:player).permit(:name, :level)
+    end
+
+    def players
+      Player
+        .where("name ILIKE ?", "%#{params[:filter]}%")
+        .order(updated_at: :desc)
     end
 end
