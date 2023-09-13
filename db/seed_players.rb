@@ -85,7 +85,7 @@ players_data = [
   },
   {
     "level": 2,
-    "name": "Senor x"
+    "name": "Señor x"
   },
   {
     "level": 4,
@@ -366,10 +366,6 @@ players_data = [
   {
     "level": 7,
     "name": "Juanecito"
-  },
-  {
-    "level": 7,
-    "name": "Jheampol"
   },
   {
     "level": 7,

@@ -30,7 +30,7 @@ class RandomTeam
   end
 
   def players
-    @players ||= Player.where('LOWER(name) IN (?)', player_names_from_list)
+    @players ||= Player.select(:name, :level).where('LOWER(name) IN (?)', player_names_from_list).distinct
   end
 
   private
