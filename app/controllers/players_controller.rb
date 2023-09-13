@@ -51,8 +51,10 @@ class PlayersController < ApplicationController
   def destroy
     @player.destroy
 
+    flash[:success] = "Player #{@player.name} was successfully destroyed."
+
     respond_to do |format|
-      format.html { redirect_to players_url, notice: "Player was successfully destroyed." }
+      format.html { redirect_to players_url }
       format.json { head :no_content }
     end
   end
