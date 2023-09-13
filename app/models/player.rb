@@ -9,4 +9,6 @@
 #  updated_at :datetime         not null
 #
 class Player < ApplicationRecord
+  validates :level, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
+  validates :name, presence: true
 end
