@@ -1,3 +1,4 @@
+@import "pagy.css";
 @import "shadcn.css";
 @tailwind base;
 @tailwind components;
@@ -12,3 +13,7 @@
 }
 
 */
+
+turbo-frame {
+  display: contents;
+}

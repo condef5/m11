@@ -20,8 +20,8 @@
   </span>
 
   <% if current_user %>
-    <%= render_button 'sign out', variant: :danger, as: :link, href: :sign_out %>
+    <%= render_button 'Sign out', variant: :danger, as: :link, href: :sign_out %>
   <% else %>
-    <%= render_button 'sign in with google', as: :link, href: :sign_in %>
+    <%= render_button 'Sign in with google', as: :link, href: :sign_in %>
   <% end %>
 </section>

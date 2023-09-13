@@ -1,10 +1,18 @@
-<div class="w-full">
+<div class="w-full pb-8">
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Players</h1>
     <%= link_to 'New player', new_player_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="players" class="min-w-full">
-    <%= render @players %>
+  <div class="mt-4 py-4">
+    <%= form_with url: players_path, method: :get, data: { controller: "form", action: "input->form#submit", turbo_frame: "players", turbo_action: "advance" } do %>
+      <%= text_field_tag "filter", nil, placeholder: "Filter", class: "inline-block rounded-md border border-gray-200 outline-none px-3 py-2  w-full", value: params[:filter] %>
+    <% end %>
   </div>
+
+  <%= turbo_frame_tag "players" do %>
+    <%= render "table", players: @players %>
+    <%== pagy_nav(@pagy, link_extra: 'data-turbo-action="advance"') %>
+  <% end %>
+
 </div>

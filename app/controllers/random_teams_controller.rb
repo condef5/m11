@@ -1,6 +1,6 @@
 class RandomTeamsController < ApplicationController
   def index
-    @random_team = RandomTeam.new(players_per_team: 7, list: session[:list])
+    @random_team = RandomTeam.new(players_per_team: 7, list: session[:list] || "")
   end
 
   def create

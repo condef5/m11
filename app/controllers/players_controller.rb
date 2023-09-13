@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
 
   # GET /players or /players.json
   def index
-    @players = Player.order(updated_at: :desc).all
+    @pagy, @players = pagy(players, items: 10)
   end
 
   # GET /players/1 or /players/1.json
@@ -51,8 +51,10 @@ class PlayersController < ApplicationController
   def destroy
     @player.destroy
 
+    flash[:success] = "Player #{@player.name} was successfully destroyed."
+
     respond_to do |format|
-      format.html { redirect_to players_url, notice: "Player was successfully destroyed." }
+      format.html { redirect_to players_url }
       format.json { head :no_content }
     end
   end
@@ -66,5 +68,11 @@ class PlayersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def player_params
       params.require(:player).permit(:name, :level)
+    end
+
+    def players
+      Player
+        .where("name ILIKE ?", "%#{params[:filter]}%")
+        .order(updated_at: :desc)
     end
 end
