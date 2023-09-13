@@ -3,7 +3,9 @@ class PlayersController < ApplicationController
 
   # GET /players or /players.json
   def index
-    @players = Player.order(updated_at: :desc).all
+    @players = Player
+      .where("name LIKE ?", "%#{params[:filter]}%")
+      .order(updated_at: :desc)
   end
 
   # GET /players/1 or /players/1.json
