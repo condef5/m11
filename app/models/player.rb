@@ -16,4 +16,6 @@ class Player < ApplicationRecord
 
   has_many :friends, -> { where(player_connections: { relation_type: :friend }) },
     through: :player_connections, source: :connected_player
+  has_many :avoids, -> { where(player_connections: { relation_type: :rival }) },
+    through: :player_connections, source: :connected_player
 end

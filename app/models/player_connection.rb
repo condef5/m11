@@ -25,6 +25,7 @@ class PlayerConnection < ApplicationRecord
   belongs_to :connected_player, class_name: 'Player'
 
   validates :relation_type, presence: true
+  validates :connected_player_id, uniqueness: { scope: [:author_id] }
 
   enum relation_type: {
     friend: 0,

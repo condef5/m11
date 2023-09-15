@@ -67,12 +67,13 @@ class PlayersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def player_params
-      params.require(:player).permit(:name, :level)
+      params.require(:player).permit(:name, :level, friend_ids: [], avoid_ids: [])
     end
 
     def players
       Player
         .where("name ILIKE ?", "%#{params[:filter]}%")
         .order(updated_at: :desc)
+        .includes(:friends, :avoids)
     end
 end

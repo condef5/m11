@@ -7,6 +7,12 @@
         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
           <div class="text-right">Level</div>
         </th>
+        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
+          Friends
+        </th>
+        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
+          Avoids
+        </th>
         <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground"></th>
       </tr>
     </thead>
@@ -19,6 +25,14 @@
 
           <td class="p-4 align-middle">
             <div class="text-right font-medium"><%= player.level %></div>
+          </td>
+
+          <td class="p-4 align-middle">
+            <div class=""><%= player.friends.pluck(:name).join(", ") %></div>
+          </td>
+
+          <td class="p-4 align-middle">
+            <div class=""><%= player.avoids.pluck(:name).join(", ") %></div>
           </td>
 
           <td class="p-4 align-middle">
