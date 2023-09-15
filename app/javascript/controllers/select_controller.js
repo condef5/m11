@@ -28,7 +28,7 @@ export default class extends Controller {
         selectOnTab: true,
         placeholder: "Select",
         closeAfterSelect: true,
-        hidePlaceholder: false,
+        hidePlaceholder: true,
         preload: true,
         create: false,
         openOnFocus: true,

@@ -37,10 +37,17 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1 or /players/1.json
   def update
     respond_to do |format|
-      if @player.update(player_params)
-        format.html { redirect_to players_url, notice: "Player was successfully updated." }
-        format.json { render :show, status: :ok, location: @player }
-      else
+      begin
+        if @player.update(player_params)
+          format.html { redirect_to players_url, notice: "Player was successfully updated." }
+          format.json { render :show, status: :ok, location: @player }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @player.errors, status: :unprocessable_entity }
+        end
+      rescue ActiveRecord::RecordInvalid => e
+        flash[:error] = "You can't add the same player to both friends and avoids"
+
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @player.errors, status: :unprocessable_entity }
       end

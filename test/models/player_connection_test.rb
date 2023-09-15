@@ -47,7 +47,7 @@ class PlayerConnectionTest < ActiveSupport::TestCase
       relation_type: :friend, connected_player: @connected_player
     )
 
-    assert_raises(ActiveRecord::RecordNotUnique) do
+    assert_raises(ActiveRecord::RecordInvalid) do
       @author.player_connections.create!(
         relation_type: :friend,
         connected_player: @connected_player
