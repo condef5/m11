@@ -1,4 +1,5 @@
 @import "pagy.css";
+@import "tom-select.css";
 @import "shadcn.css";
 @tailwind base;
 @tailwind components;

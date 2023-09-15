@@ -21,6 +21,24 @@
     <%= form.number_field :level, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
+  <div class="my-5">
+    <%= form.label "friend_ids", "Friend Players" %>
+    <%= form.select "friend_ids", {} , {}, {
+        multiple: true,
+        class: "w-full shadow rounded-md border border-gray-200 outline-none",
+        data: { controller: "select", select_url_value: players_path, select_selected_value: player.friends.to_json }
+      } %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label "avoid_ids", "Avoided Players" %>
+    <%= form.select "avoid_ids", {} , {}, {
+        multiple: true,
+        class: "w-full shadow rounded-md border border-gray-200 outline-none",
+        data: { controller: "select", select_url_value: players_path, select_selected_value: player.avoids.to_json }
+      } %>
+  </div>
+
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>

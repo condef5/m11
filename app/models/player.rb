@@ -11,4 +11,11 @@
 class Player < ApplicationRecord
   validates :level, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
   validates :name, presence: true
+
+  has_many :player_connections, foreign_key: :author_id, dependent: :destroy
+
+  has_many :friends, -> { where(player_connections: { relation_type: :friend }) },
+    through: :player_connections, source: :connected_player
+  has_many :avoids, -> { where(player_connections: { relation_type: :rival }) },
+    through: :player_connections, source: :connected_player
 end

@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: players
+#
+#  id         :bigint           not null, primary key
+#  level      :integer
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+spectre:
+  level: 2
+  name: spectre
+
+lucas:
+  level: 5
+  name: lucas
+
+spike:
+  level: 2
+  name: spike
