@@ -4,11 +4,11 @@
 
 import { application } from "./application"
 
+import Dropdown from 'stimulus-dropdown'
+application.register('dropdown', Dropdown)
+
 import FormController from "./form_controller"
 application.register("form", FormController)
-
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
 
 import SelectController from "./select_controller"
 application.register("select", SelectController)

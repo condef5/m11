@@ -11,12 +11,13 @@
   </head>
 
   <body>
-    <%= render "shared/header" %>
+    <div class="bg-white">
+      <%= render "shared/header" %>
+      <main class="container max-w-[1080px] mx-auto mt-28 px-5">
+        <%= render 'shared/flash_messages' %>
 
-    <main class="container mx-auto mt-12 px-5">
-      <%= render 'shared/flash_messages' %>
-
-      <%= yield %>
-    </main>
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>
