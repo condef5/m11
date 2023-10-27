@@ -1,7 +1,7 @@
 <% if flash.any? %>
   <div class="my-2 min-w-[620px]">
     <% flash.each do |type, message| %>
-      <div class="<%= flash_class(type) %> py-2 px-3 font-medium rounded-lg inline-block" role="alert">
+      <div class="<%= flash_class(type) %> w-full text-center py-2 px-3 font-medium rounded-lg inline-block" role="alert">
         <%= message %>
       </div>
     <% end %>
