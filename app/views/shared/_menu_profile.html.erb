@@ -25,16 +25,17 @@
     tabindex="-1"
   >
     <!-- Active: "bg-gray-100", Not Active: "" -->
-    <%= link_to "Your profile", "#" , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
-    <%= link_to "Settings", "#" , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
+    <%= link_to t("menu.your_profile"), "#" , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
+    <%= link_to t("menu.settings"), "#" , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
     <hr>
 
     <% if current_user.admin %>
-      <%= link_to "Players", players_path , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
-      <%= link_to "Create team", random_teams_path, class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
+      <%= link_to t("menu.players"), players_path , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
+      <%= link_to t("menu.create_team"), random_teams_path, class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
       <hr>
     <% end %>
 
-    <%= link_to "Sign out", sign_out_path , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
+    <%= link_to t("menu.sign_out"), sign_out_path , class: "block px-4 py-2 text-sm text-gray-700", role: "menuitem", tabindex: "-1"  %>
   </div>
 </div>
+

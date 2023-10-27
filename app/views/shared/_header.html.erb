@@ -17,8 +17,8 @@
     <div class="hidden sm:ml-6 sm:block ">
       <div class="flex space-x-8">
         <% if current_user&.admin %>
-          <%= link_to "Players", players_path , class: "hover:bg-gray-100 px-3 py-2 rounded text-sm font-medium leading-6 text-gray-700" %>
-          <%= link_to "Create team", random_teams_path, class: "hover:bg-gray-100 px-3 py-2 rounded text-sm font-medium leading-6 text-gray-700" %>
+          <%= link_to t("menu.players"), players_path , class: "hover:bg-gray-100 px-3 py-2 rounded text-sm font-medium leading-6 text-gray-700" %>
+          <%= link_to t("menu.create_teams"), random_teams_path, class: "hover:bg-gray-100 px-3 py-2 rounded text-sm font-medium leading-6 text-gray-700" %>
           <hr>
         <% end %>
       </div>
