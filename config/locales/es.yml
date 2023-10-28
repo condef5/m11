@@ -37,6 +37,14 @@ es:
       destroy: "%{model} eliminado exitosamente."
     models:
       player: "Jugador"
+    attributes:
+      player:
+        name: "Nombre"
+        level: "Nivel"
+        friends: "Amigos"
+        friend_ids: "Amigos"
+        avoids: "Rivales"
+        avoid_ids: "Rivales"
   home:
     index:
       header: Aumenta la diversión en tus partidos de fútbol
@@ -47,3 +55,11 @@ es:
     players: "Jugadores"
     create_team: "Crear equipo"
     sign_out: "Cerrar sesión"
+  players:
+    actions:
+      new: "Nuevo jugador"
+      filter: "Buscar jugadores"
+    index:
+      heading: "Lista de jugadores"
+    edit:
+      heading: "Editar jugador"

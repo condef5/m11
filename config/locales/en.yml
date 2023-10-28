@@ -35,6 +35,14 @@ en:
       create: "%{model} successfully created."
       update: "%{model} successfully updated."
       destroy: "%{model} successfully destroyed."
+    attributes:
+      player:
+        name: "Name"
+        level: "Level"
+        friends: "Friends"
+        friend_ids: "Friends"
+        avoids: "Avoids"
+        avoid_ids: "Avoids"
   home:
     index:
       header: Enhance the fun in your football matches
@@ -45,4 +53,12 @@ en:
     players: "Players"
     create_team: "Create team"
     sign_out: "Sign out"
-
+  players:
+    actions:
+      new: "New player"
+      edit: "Edit player"
+      filter: "Search players"
+    index:
+      heading: "List of players"
+    edit:
+      heading: "Edit player"
