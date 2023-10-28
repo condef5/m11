@@ -1,7 +1,9 @@
 <%= form_with(model: player, class: "contents") do |form| %>
   <% if player.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(player.errors.count, "error") %> prohibited this player from being saved:</h2>
+      <h2>
+        <%= t('errors.template.header', model: Player.model_name.human, count: player.errors.count) %>
+      </h2>
 
       <ul>
         <% player.errors.each do |error| %>
