@@ -30,10 +30,17 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 es:
+  activerecord:
+    success:
+      create: "%{model} creado exitosamente."
+      update: "%{model} actualizado exitosamente."
+      destroy: "%{model} eliminado exitosamente."
+    models:
+      player: "Jugador"
   home:
     index:
-      header: Mejora la diversión en tus partidos de fútbol
-      description: Disfruta de emocionantes y equilibrados partidos de fútbol. Cada jugador puede agregar amigos con quienes jugar y rivales a evitar, transformando la experiencia de juego.
+      header: Aumenta la diversión en tus partidos de fútbol
+      description: Disfruta de emocionantes y equilibrados partidos de fútbol. Cada jugador puede agregar amigos con quienes jugar y rivales para enfrentar, transformando la experiencia de juego.
   menu:
     your_profile: "Tu perfil"
     settings: "Configuración"

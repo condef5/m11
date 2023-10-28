@@ -30,6 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    success:
+      create: "%{model} successfully created."
+      update: "%{model} successfully updated."
+      destroy: "%{model} successfully destroyed."
   home:
     index:
       header: Enhance the fun in your football matches
