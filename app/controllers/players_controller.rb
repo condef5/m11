@@ -25,7 +25,7 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to player_url(@player), notice: "Player was successfully created." }
+        format.html { redirect_to player_url(@player), notice: success_notice(:create, @player) }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class PlayersController < ApplicationController
     respond_to do |format|
       begin
         if @player.update(player_params)
-          format.html { redirect_to players_url, notice: "Player was successfully updated." }
+          format.html { redirect_to players_url, notice: success_notice(:update, @player) }
           format.json { render :show, status: :ok, location: @player }
         else
           format.html { render :edit, status: :unprocessable_entity }

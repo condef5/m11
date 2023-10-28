@@ -1,19 +1,21 @@
-<div class="rounded-md border mb-4">
+<div class="rounded-md border mb-4 overflow-auto">
   <table class="w-full caption-bottom text-sm">
     <thead class="">
       <tr class="border-b transition-colors hover:bg-muted/50">
-        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground lg:min-w-[120px]">Name</th>
+        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground min-w-[120px] w-[25%]">
+          <%= Player.human_attribute_name :name %>
+        </th>
         <%# <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">Level</th> %>
-        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
-          <div class="text-right">Level</div>
+        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[60px]">
+          <div class="text-right"><%= Player.human_attribute_name :level %></div>
         </th>
-        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
-          Friends
+        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[25%]">
+          <%= Player.human_attribute_name :friends %>
         </th>
-        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground">
-          Avoids
+        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[25%]">
+          <%= Player.human_attribute_name :avoids %>
         </th>
-        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground"></th>
+        <th class="h-12 px-4 text-left align-middle font-medium text-muted-foreground min-w-[90px]"></th>
       </tr>
     </thead>
     <tbody class="[&_tr:last-child]:border-0">

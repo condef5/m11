@@ -12,3 +12,6 @@ application.register("form", FormController)
 
 import SelectController from "./select_controller"
 application.register("select", SelectController)
+
+import Notification from 'stimulus-notification'
+application.register('notification', Notification)
