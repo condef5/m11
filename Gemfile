@@ -54,6 +54,8 @@ gem 'omniauth-rails_csrf_protection', '~> 0.1'
 
 gem "pagy", "~> 6.0"
 
+gem 'rails-i18n'
+
 gem "shadcn-ui", "~> 0.0.5"
 
 gem "tailwindcss-rails"
