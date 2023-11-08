@@ -15,12 +15,19 @@
 #
 # Indexes
 #
-#  unique_usernames  (username) UNIQUEFon
+#  unique_usernames  (username) UNIQUE
 #
 class User < ApplicationRecord
+  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true
+
+  has_one :player, dependent: :destroy
+  accepts_nested_attributes_for :player
+
   def update_dynamic_attributes(auth)
     self.name = [auth.info.first_name, auth.info.last_name].join(' ')
     self.email = auth.info.email
+    self.username = auth.info.email
     self.image = auth.info.image if auth.info.image?
   end
 

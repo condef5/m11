@@ -1,6 +1,52 @@
 <div class="h-full w-full fixed inset-0 flex justify-center z-10 bg-gray-50 ">
   <div class="w-full max-w-[520px] m-8 text-center">
-    <h2 class="text-2xl">Onboarding</h2>
-    <p class="">Necesitamos saber un poco mas de ti</p>
+    <h2 class="text-3xl">Onboarding</h2>
+    <p class="text-gray-500">Necesitamos saber un poco mas de ti</p>
+
+    <div class="mt-12 px-4 py-8 w-full rounded-md text-left shadow-lg bg-white">
+      <%= form_with(model: @user, url: onboarding_path, class: "contents") do |form| %>
+        <% if @user.errors.any? %>
+          <div class="my-3 bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+            <h2>
+              <%= t('errors.template.header', model: User.model_name.human, count: @user.errors.count) %>
+            </h2>
+
+            <ul>
+              <% @user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <img src="<%= @user.image %>" alt="" class="h-24 w-24 m-auto sm:h-32 sm:w-32 ring-4 ring-white object-cover rounded-full bg-gray-300" />
+
+        <div class="my-5 bg-gra">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :email %>
+          <%= form.text_field :email, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full opacity-70 bg-gray-300", disabled: true %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :username %>
+          <%= form.text_field :username, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        </div>
+
+        <%= form.fields_for :player do |player_form| %>
+          <div class="my-5">
+            <%= player_form.label :level %>
+            <%= player_form.number_field :level, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+          </div>
+        <% end %>
+
+        <div class="inline">
+          <%= form.submit "Guardar", data: { disable_with: false }, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

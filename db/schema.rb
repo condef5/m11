@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_09_13_224715) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_08_065114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_09_13_224715) do
     t.integer "level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_players_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,4 +58,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_09_13_224715) do
 
   add_foreign_key "player_connections", "players", column: "author_id"
   add_foreign_key "player_connections", "players", column: "connected_player_id"
+  add_foreign_key "players", "users"
 end
