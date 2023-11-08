@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :players
   resources :random_teams, only: %i[index create]
-  resources :onboarding, only: %i[index create]
+  resource :onboarding, only: %i[show]
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#failure'
