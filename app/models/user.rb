@@ -5,9 +5,8 @@
 #  id         :bigint           not null, primary key
 #  admin      :boolean          default(FALSE)
 #  email      :string
-#  first_name :string
 #  image      :string
-#  last_name  :string
+#  name       :string
 #  provider   :string
 #  uid        :string
 #  username   :string
@@ -16,17 +15,11 @@
 #
 # Indexes
 #
-#  unique_usernames  (username) UNIQUE
+#  unique_usernames  (username) UNIQUEFon
 #
 class User < ApplicationRecord
-  def full_name
-    [first_name, last_name].join(' ')
-  end
-
-
   def update_dynamic_attributes(auth)
-    self.first_name = auth.info.first_name
-    self.last_name = auth.info.last_name
+    self.name = [auth.info.first_name, auth.info.last_name].join(' ')
     self.email = auth.info.email
     self.image = auth.info.image if auth.info.image?
   end
