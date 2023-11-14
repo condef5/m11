@@ -2,7 +2,12 @@ class SessionsController < ApplicationController
   def create
     user = User.find_or_create_with_omniauth(request.env['omniauth.auth'])
     session[:user_id] = user.id
-    redirect_to after_sign_in_path, notice: "Signed in as #{user.name}"
+
+    if user.player.blank?
+      redirect_to onboarding_path, notice: "Welcome #{user.name}"
+    else
+      redirect_to after_sign_in_path, notice: "Signed in as #{user.name}"
+    end
   end
 
   def failure
