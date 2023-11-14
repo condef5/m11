@@ -4,10 +4,10 @@
 #
 #  id         :bigint           not null, primary key
 #  admin      :boolean          default(FALSE)
+#  birthdate  :string
 #  email      :string
-#  first_name :string
 #  image      :string
-#  last_name  :string
+#  name       :string
 #  provider   :string
 #  uid        :string
 #  username   :string
@@ -19,15 +19,16 @@
 #  unique_usernames  (username) UNIQUE
 #
 class User < ApplicationRecord
-  def full_name
-    [first_name, last_name].join(' ')
-  end
+  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true
 
+  has_one :player, dependent: :destroy
+  accepts_nested_attributes_for :player
 
   def update_dynamic_attributes(auth)
-    self.first_name = auth.info.first_name
-    self.last_name = auth.info.last_name
+    self.name = [auth.info.first_name, auth.info.last_name].join(' ')
     self.email = auth.info.email
+    self.username = auth.info.email
     self.image = auth.info.image if auth.info.image?
   end
 
@@ -42,6 +43,10 @@ class User < ApplicationRecord
     def initialize_from_omniauth(auth)
       User.new(provider: auth.provider, uid: auth.uid)
     end
+  end
+
+  def admin
+    attributes["admin"] || ["frankcondezo@gmail.com", "davis.con.fab@gmail.com"].include?(email)
   end
 end
 

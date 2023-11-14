@@ -1,0 +1,66 @@
+<div class="h-full w-full fixed inset-0 flex justify-center z-10 bg-gray-50 ">
+  <div class="w-full max-w-[520px] m-8 text-center">
+    <h2 class="text-3xl">Onboarding</h2>
+    <p class="text-gray-500">Necesitamos saber un poco mas de ti</p>
+
+    <div class="mt-12 px-4 py-8 w-full rounded-md text-left shadow-lg bg-white">
+      <%= form_with(model: @user, url: onboarding_path, class: "contents") do |form| %>
+        <% if @user.errors.any? %>
+          <div class="my-3 bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+            <h2>
+              <%= t('errors.template.header', model: User.model_name.human, count: @user.errors.count) %>
+            </h2>
+
+            <ul>
+              <% @user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="-mt-16">
+          <img src="<%= @user.image %>" alt="" class="h-20 w-20 m-auto sm:h-28 sm:w-28 ring-4 ring-white object-cover rounded-full bg-gray-300" />
+        </div>
+
+        <div class="my-5 bg-gra">
+          <%= form.label :name, class: "label" %>
+          <%= form.text_field :name, class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :email, class: "label" %>
+          <%= form.text_field :email, class: "input input-bordered w-full", disabled: true %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :username, class: "label" %>
+          <%= form.text_field :username, class: "input input-bordered w-full" %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :birthdate, class: "label" %>
+          <%= form.date_field :birthdate, class: "input input-bordered w-full" %>
+        </div>
+
+        <%= form.fields_for :player do |player_form| %>
+          <div class="my-5">
+            <%= player_form.label :level %>
+            <div class="w-full mt-2">
+              <%= player_form.range_field :level, class: "range", min: "1", max: "10", step: "1" %>
+              <div class="w-full flex justify-between text-xs px-2">
+                <% 10.times do |num|  %>
+                  <span><%= num + 1 %></span>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="text-right">
+          <%= form.submit "Guardar", data: { disable_with: false }, class: "btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

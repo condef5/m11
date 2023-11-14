@@ -38,9 +38,12 @@ es:
     models:
       player: "Jugador"
     attributes:
+      user:
+        name: "Nombres"
+        birthdate: "Fecha de cumpleaños"
       player:
         name: "Nombre"
-        level: "Nivel"
+        level: "Nivel de juego"
         friends: "Amigos"
         friend_ids: "Amigos"
         avoids: "Rivales"
