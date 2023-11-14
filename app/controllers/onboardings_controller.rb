@@ -1,7 +1,13 @@
 class OnboardingsController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :update]
+
   def show
-    @user = User.find(current_user.id)
-    @user.build_player if @user.player.nil?
+    if current_user.player.present?
+      redirect_to root_path, notice: 'Onboarding was completed!'
+    else
+      @user = User.find(current_user.id)
+      @user.build_player if @user.player.nil?
+    end
   end
 
   def update
