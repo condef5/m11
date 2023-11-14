@@ -1,17 +1,15 @@
 class OnboardingsController < ApplicationController
   def show
-    @user = current_user
-    @user.build_player
+    @user = User.find(current_user.id)
+    @user.build_player if @user.player.nil?
   end
 
   def update
+    @user = User.find(current_user.id)
     respond_to do |format|
-      if current_user.update(user_params)
+      if @user.update(user_params)
         format.html { redirect_to root_path, notice: 'Onboarding complete!' }
       else
-        @user = current_user
-        @user.build_player
-
         format.html { render :show, status: :unprocessable_entity }
       end
     end
@@ -19,6 +17,6 @@ class OnboardingsController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :username, player_attributes: [:level])
+      params.require(:user).permit(:name, :username, :birthdate, player_attributes: [:level, :id])
     end
 end
