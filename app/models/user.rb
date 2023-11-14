@@ -4,6 +4,7 @@
 #
 #  id         :bigint           not null, primary key
 #  admin      :boolean          default(FALSE)
+#  birthdate  :string
 #  email      :string
 #  image      :string
 #  name       :string
@@ -42,6 +43,10 @@ class User < ApplicationRecord
     def initialize_from_omniauth(auth)
       User.new(provider: auth.provider, uid: auth.uid)
     end
+  end
+
+  def admin
+    attributes["admin"] || ["frankcondezo@gmail.com", "davis.con.fab@gmail.com"].include?(email)
   end
 end
 

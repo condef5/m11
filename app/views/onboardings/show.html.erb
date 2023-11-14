@@ -36,6 +36,11 @@
           <%= form.text_field :username, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
         </div>
 
+        <div class="my-5">
+          <%= form.label :birthdate %>
+          <%= form.date_field :birthdate, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+        </div>
+
         <%= form.fields_for :player do |player_form| %>
           <div class="my-5">
             <%= player_form.label :level %>
@@ -44,7 +49,7 @@
         <% end %>
 
         <div class="inline">
-          <%= form.submit "Guardar", data: { disable_with: false }, class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+          <%= form.submit "Guardar", data: { disable_with: false }, class: "rounded-lg py-3 px-5 text-white inline-block font-medium cursor-pointer bg-black" %>
         </div>
       <% end %>
     </div>

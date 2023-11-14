@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :email
       t.string :username, index: { unique: true, name: 'unique_usernames' }
       t.string :image
+      t.string :birthdate
       t.string :provider
       t.string :uid
 

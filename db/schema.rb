@@ -48,6 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_065114) do
     t.string "email"
     t.string "username"
     t.string "image"
+    t.string "birthdate"
     t.string "provider"
     t.string "uid"
     t.boolean "admin", default: false
