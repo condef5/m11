@@ -11,6 +11,7 @@
 #
 # Indexes
 #
+#  index_players_on_name     (name)
 #  index_players_on_user_id  (user_id)
 #
 # Foreign Keys
@@ -27,4 +28,8 @@ class Player < ApplicationRecord
     through: :player_connections, source: :connected_player
   has_many :avoids, -> { where(player_connections: { relation_type: :rival }) },
     through: :player_connections, source: :connected_player
+
+  include PgSearch::Model
+
+  pg_search_scope :search_name, against: :name, using: :trigram
 end
