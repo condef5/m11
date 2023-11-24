@@ -79,7 +79,7 @@ class PlayersController < ApplicationController
 
     def players
       Player
-        .where("name ILIKE ?", "%#{params[:filter]}%")
+        .search_name(params[:filter])
         .order(updated_at: :desc)
         .includes(:friends, :avoids)
     end
