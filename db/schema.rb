@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_24_071917) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_24_213902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -20,6 +20,12 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_24_071917) do
     t.bigint "survey_id", null: false
     t.bigint "question_id", null: false
     t.integer "point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "game_days", force: :cascade do |t|
+    t.text "player_list"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

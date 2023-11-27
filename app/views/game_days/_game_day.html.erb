@@ -1,0 +1,14 @@
+<div id="<%= dom_id game_day %>">
+  <strong class="block font-medium mb-1">Player list:</strong>
+  <div class="mockup-code bg-white-400 text-white my-4 max-w-xs">
+    <% game_day.player_list.split("\n") do |line| %>
+      <pre><code><%= line.squeeze(" ") %></code></pre>
+    <% end %>
+  </div>
+
+  <% if action_name != "show" %>
+    <%= link_to "Show this game day", game_day, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this game day', edit_game_day_path(game_day), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <hr class="mt-6">
+  <% end %>
+</div>
