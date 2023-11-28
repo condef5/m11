@@ -1,0 +1,9 @@
+<% if @players.any?  %>
+  <% @players.each do |player| %>
+    <li class="list-group-item p-1" role="option" data-autocomplete-value="<%= player.name %>"><%= player.name %></li>
+  <% end %>
+<% else %>
+  <li class="list-group-item p-1">Sin resultados</li>
+<% end %>
+
+
