@@ -30,6 +30,7 @@ export default class Autocomplete extends Controller {
     this.inputTarget.addEventListener("keydown", this.onKeydown);
     this.inputTarget.addEventListener("blur", this.onInputBlur);
     this.inputTarget.addEventListener("input", this.onInputChange);
+    this.inputTarget.addEventListener("click", this.onInputChange);
     this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown);
     this.resultsTarget.addEventListener("click", this.onResultsClick);
 
@@ -136,9 +137,11 @@ export default class Autocomplete extends Controller {
       selected.getAttribute("data-autocomplete-label") ||
       selected.textContent.trim();
     const value = selected.getAttribute("data-autocomplete-value") || textValue;
+    let prevValue = this.inputTarget.value;
     this.inputTarget.value = textValue;
 
     if (this.hasHiddenTarget) {
+      prevValue = this.hiddenTarget.value || prevValue;
       this.hiddenTarget.value = value;
       this.hiddenTarget.dispatchEvent(new Event("input"));
       this.hiddenTarget.dispatchEvent(new Event("change"));
@@ -152,7 +155,7 @@ export default class Autocomplete extends Controller {
     this.element.dispatchEvent(
       new CustomEvent("autocomplete.change", {
         bubbles: true,
-        detail: { value: value, textValue: textValue, selected: selected },
+        detail: { value: value, textValue: textValue, selected: selected, prevValue },
       })
     );
   }
@@ -318,5 +321,3 @@ const debounce = (fn, delay = 10) => {
     timeoutId = setTimeout(fn, delay);
   };
 };
-
-export { Autocomplete };
