@@ -13,14 +13,41 @@
           <%= form.label :max_generation_attemps, class: "label" %>
           <%= form.number_field :max_generation_attemps, class: "input input-bordered w-full max-w-xs", placeholder: 'Player per team' %>
         </div>
-        <div class="Gap">
+        <div class="gap">
           <%= form.label :gap, class: "label" %>
           <%= form.number_field :gap, class: "input input-bordered w-full max-w-xs" %>
         </div>
       </div>
 
-      <div class="form-group max-w-xs">
-        <%= form.text_area :list, class: "textarea textarea-bordered w-full min-h-[360px]", placeholder: "Lista de jugadores" %>
+      <div class="form-group max-w-md grid grid-cols-2 gap-2" data-controller="player-list-sync">
+        <%= form.text_area :list,
+            data: { player_list_sync_target: "textarea" },
+            class: "textarea textarea-bordered w-full min-h-[360px]",
+            placeholder: "Lista de jugadores"
+        %>
+
+        <% if @validator && !@validator.valid? %>
+          <div class="textarea textarea-bordered border-red-400 min-h-[480px] w-full">
+            <% @validator.full_players.each do |raw| %>
+              <div class="w-full relative">
+                <% if raw[:player].present? %>
+                  <div class="h-7 w-2"></div>
+                <% else %>
+                  <%= content_tag :div, class: "relative", data: {
+                controller: "autocomplete",
+                autocomplete_url_value: players_autocompletes_path,
+                action: "autocomplete.change->player-list-sync#copy"
+              }, role: "combobox" do %>
+                    <input type="text" class="input input-bordered w-full input-xs" data-autocomplete-target="input" value="<%= raw[:name] %>" />
+                    <input type="hidden" name="bird_id" data-autocomplete-target="hidden" />
+                    <ul class="list-group bg-red-100 absolute z-20 w-full" data-autocomplete-target="results" hidden="">
+                    </ul>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       </div>
 
       <%= form.submit "Generar", class: "btn mt-4" %>
@@ -44,17 +71,6 @@
           </ol>
         </div>
       <% end %>
-    </div>
-  <% end %>
-
-  <% if @random_team.missing_players.any? %>
-    <div class="mt-6">
-      <h3 class="font-semibold mb-1">Missing players</h3>
-      <ul>
-        <% @random_team.missing_players.each do |player| %>
-          <li><%= player %></li>
-        <% end %>
-      </ul>
     </div>
   <% end %>
 </div>
