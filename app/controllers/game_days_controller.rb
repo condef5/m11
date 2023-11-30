@@ -43,7 +43,7 @@ class GameDaysController < ApplicationController
         format.html { redirect_to game_day_url(@game_day), notice: "Game day was successfully updated." }
         format.json { render :show, status: :ok, location: @game_day }
       else
-        flash.now[:notice] = "Invalid players"
+        flash.now[:alert] = "Invalid players"
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @game_day.errors, status: :unprocessable_entity }
       end

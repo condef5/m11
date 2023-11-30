@@ -13,11 +13,8 @@ application.register("form", FormController);
 import SelectController from "./select_controller";
 application.register("select", SelectController);
 
-import Notification from "stimulus-notification";
-application.register("notification", Notification);
-
 import Autocomplete from "./autocomplete_controller";
 application.register("autocomplete", Autocomplete);
 
 import PlayerListSyncController from "./player_list_sync_controller";
-application.register("player-list-sync", EditableSyncController);
+application.register("player-list-sync", PlayerListSyncController);
