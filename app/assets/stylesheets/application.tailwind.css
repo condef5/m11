@@ -17,3 +17,7 @@
 turbo-frame {
   display: contents;
 }
+
+[aria-selected="true"] {
+  background-color: aqua;
+}
