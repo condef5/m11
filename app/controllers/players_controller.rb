@@ -78,8 +78,13 @@ class PlayersController < ApplicationController
     end
 
     def players
-      Player
-        .search_name(params[:filter])
+      player_query = Player.all
+
+      if params[:filter].present?
+        player_query = player_query.search_name(params[:filter])
+      end
+
+      player_query
         .order(updated_at: :desc)
         .includes(:friends, :avoids)
     end
