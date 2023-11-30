@@ -2,11 +2,13 @@ class RandomTeam
   include ActiveModel::Model
   include ActiveModel::Attributes
 
-  MAX_GENERATION_ATTEMPTS = 10
+  MAX_GENERATION_ATTEMPTS = 1000
 
   attribute :list, :string
-  attribute :players_per_team, :integer, default: 7
   attribute :teams, default: []
+  attribute :players_per_team, :integer, default: 7
+  attribute :max_generation_attemps, :integer, default: MAX_GENERATION_ATTEMPTS
+  attribute :gap, :integer, default: 1
 
   validates :list, presence: true
   validates :players_per_team, presence: true
@@ -17,12 +19,12 @@ class RandomTeam
   end
 
   def generate!
-    MAX_GENERATION_ATTEMPTS.times do |i|
+    max_generation_attemps.times do |i|
       possible_teams = players.shuffle.each_slice(players_per_team).to_a
       possible_teams_weights = possible_teams.map { |team| team_weight(team) }
       diff_team_weight = possible_teams_weights.max - possible_teams_weights.min
 
-      if diff_team_weight <= 2 && valid_teams?(possible_teams, players)
+      if diff_team_weight <= gap && valid_teams?(possible_teams, players)
         self.teams = possible_teams
         return
       end
@@ -70,11 +72,15 @@ class RandomTeam
   private
 
   def player_names_from_list
-    list.split("\n")
-      .map(&:strip)
-      .reject(&:empty?)
-      .map { |line| line.gsub(/^\d+\.\s*/, '') }
+    format_list
       .map(&:downcase)
+  end
+
+  def format_list
+    list.split("\n")
+    .map(&:strip)
+    .reject(&:empty?)
+    .map { |line| line.gsub(/^\d+\.\s*/, '') }
   end
 
   def team_weight(team)

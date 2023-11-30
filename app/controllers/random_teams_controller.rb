@@ -22,6 +22,6 @@ class RandomTeamsController < ApplicationController
   private
 
   def random_team_params
-    params.require(:random_team).permit(:list, :players_per_team)
+    params.require(:random_team).permit(:list, :players_per_team, :max_generation_attemps, :gap)
   end
 end
