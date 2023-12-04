@@ -1,0 +1,39 @@
+<div class="">
+  <div class="w-full max-w-[520px] m-8">
+    <h2 class="text-3xl">Tu perfil</h2>
+
+    <div class="mt-4 w-full ">
+      <%= form_with(model: @user, url: profile_path, class: "contents") do |form| %>
+        <div class="">
+          <img src="<%= @user.image %>" alt="" class="h-20 w-20 sm:h-28 sm:w-28 ring-4 ring-white object-cover rounded-full bg-gray-300" />
+        </div>
+
+        <div class="my-5 bg-gra">
+          <%= form.label :name, class: "label" %>
+          <%= form.text_field :name, class: "input input-bordered w-full" %>
+          <%= errors_helper(@user, :name) %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :email, class: "label" %>
+          <%= form.text_field :email, class: "input input-bordered w-full", disabled: true %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :username, class: "label" %>
+          <%= form.text_field :username, class: "input input-bordered w-full" %>
+          <%= errors_helper(@user, :username) %>
+        </div>
+
+        <div class="my-5">
+          <%= form.label :birthdate, class: "label" %>
+          <%= form.date_field :birthdate, class: "input input-bordered w-full" %>
+        </div>
+
+        <div>
+          <%= form.submit "Guardar", data: { disable_with: false }, class: "btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

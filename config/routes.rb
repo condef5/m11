@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :random_teams, only: %i[index create]
   resource :onboarding, only: %i[show update]
   resources :users, only: %i[index]
+  resource :profile, only: %i[show update]
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#failure'
