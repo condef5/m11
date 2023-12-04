@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-  
+
   resources :game_days
   root 'home#index'
 
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :players
   resources :random_teams, only: %i[index create]
   resource :onboarding, only: %i[show update]
+  resources :users, only: %i[index]
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#failure'

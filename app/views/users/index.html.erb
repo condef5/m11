@@ -1,0 +1,38 @@
+<div class="w-full">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Jugadores de cojos de tingo maría</h1>
+  </div>
+
+  <div class="overflow-x-auto mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Level</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td>
+              <div class="flex items-center gap-3">
+                <div class="avatar">
+                  <div class="mask mask-squircle w-12 h-12">
+                    <img src="<%= user.image %>"  alt="Avatar Tailwind CSS Component" />
+                  </div>
+                </div>
+                <div>
+                  <div class="font-bold"><%= user.name %></div>
+                  <div class="text-sm opacity-50"><%= user.username %></div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="badge badge-ghost badge-md"><%= user.player.level %></span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
