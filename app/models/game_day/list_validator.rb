@@ -17,8 +17,6 @@ class GameDay::ListValidator
   end
 
   def valid?
-    puts "present_players.size: #{present_players.size}"
-    puts "cleaned_list.count: #{cleaned_list.count}"
     present_players.size == cleaned_list.count
   end
 

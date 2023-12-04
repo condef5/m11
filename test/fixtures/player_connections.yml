@@ -23,6 +23,6 @@
 
 one:
   relation_type: :friend
-  author: spectre
-  connected_player: lucas
+  author: player_one
+  connected_player: player_two
 

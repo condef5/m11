@@ -32,9 +32,9 @@
 es:
   activemodel:
     models:
-      random_team: "Equipo aleatorio"
+      random_team_form: "Equipo aleatorio"
     attributes:
-      random_team:
+      random_team_form:
         players_per_team: "N° de Jugadores"
         max_generation_attemps: "N° de intentos"
   activerecord:

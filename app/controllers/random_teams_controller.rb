@@ -1,24 +1,33 @@
 class RandomTeamsController < ApplicationController
   def index
-    @random_team = RandomTeam.new(players_per_team: session[:players_per_team], list: session[:list] || "")
-    @validator =  GameDay::ListValidator.new(list: session[:list] || "")
+    @game_day = GameDay.current
+    @form = RandomTeamForm.new(players_per_team: @game_day.players_per_team, list: @game_day.player_list)
+    @form.game_day = @game_day
   end
 
   def create
-    @random_team = RandomTeam.new(random_team_params)
-    @validator = GameDay::ListValidator.new(list: @random_team.list)
-    session[:list] = @random_team.list
-    session[:players_per_team] = @random_team.players_per_team
+    @form = RandomTeamForm.new(random_team_params)
+    @game_day = GameDay.current
+    @form.game_day = @game_day
+    @game_day.teams = []
 
-    if @validator.valid?
-      @random_team.generate!
-      flash.now[:success] = 'Random teams were successfully created.'
+    if @form.save
+      random_team = RandomTeam.new(
+        players: @game_day.players,
+        **random_team_params.except(:list).to_h.symbolize_keys
+      )
 
-      render :index, status: :unprocessable_entity
-    else
-      flash.now[:alert] = 'Missing players in the list.'
-      render :index,  status: :unprocessable_entity
+      @teams = random_team.generate
+
+      if @teams.any?
+        @game_day.save_teams_and_increase_attemps(@teams)
+        flash.now[:notice] = 'Se crearon equipos aleatorios con éxito.'
+      else
+        flash.now[:alert] = 'No se pudo generar los equipos, cambiar los parámetros e intentar de nuevo'
+      end
     end
+
+    render :index, status: :unprocessable_entity
   end
 
   private

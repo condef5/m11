@@ -15,4 +15,12 @@ module ApplicationHelper
       'bg-gray-500 text-white'
     end
   end
+
+  def errors_helper(model, field)
+    if model.errors.include?(field)
+      model.errors.full_messages_for(field).each do |message|
+        return content_tag(:span, message, class: 'text-red-400 text-sm')
+      end
+    end
+  end
 end

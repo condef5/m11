@@ -1,13 +1,23 @@
 <div class="w-full">
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">
+      Generar equipo aleatorio
+    </h1>
+    <div>
+      Numero de intentos: <%= @game_day.generation_attempts %>
+    </div>
+  </div>
 
-  <h1 class="font-bold text-4xl mb-8">Crear equipo aleatorio</h1>
-
-  <div class="grid grid-cols-2 gap-5">
-    <%= form_with(model: @random_team,  url: random_teams_path, method: :post) do |form| %>
-      <div class="flex gap-4 mb-4 max-w-md items-end">
+  <div class="grid grid-cols-2 gap-5 mt-6">
+    <%= form_with(model: @form,  url: random_teams_path, method: :post) do |form| %>
+      <div class="flex gap-4 mb-4 max-w-lg">
         <div class="form-group">
           <%= form.label :players_per_team, class: "label" %>
-          <%= form.number_field :players_per_team, class: "input input-bordered w-full max-w-xs", placeholder: 'Player per team' %>
+          <div>
+            <%= form.number_field :players_per_team, class: "input input-bordered w-full max-w-xs", placeholder: 'Player per team' %>
+            <%= errors_helper(@form, :players_per_team) %>
+          </div>
+
         </div>
         <div class="form-group">
           <%= form.label :max_generation_attemps, class: "label" %>
@@ -19,30 +29,35 @@
         </div>
       </div>
 
-      <div class="form-group max-w-md grid grid-cols-2 gap-2" data-controller="player-list-sync">
-        <%= form.text_area :list,
+      <div class="form-group max-w-lg grid grid-cols-2 gap-2" data-controller="player-list-sync">
+        <div>
+          <%= form.text_area :list,
             data: { player_list_sync_target: "textarea" },
             class: "textarea textarea-bordered w-full min-h-[360px]",
             placeholder: "Lista de jugadores"
-        %>
+          %>
+          <%= errors_helper(@form, :list) %>
+          <% if @form.duplicated_players.any? %>
+            <div class="text-sm">
+              <%= @form.duplicated_players.join(",") %>
+            </div>
+          <% end %>
 
-        <% if @validator && !@validator.valid? %>
+        </div>
+
+        <% if @form.missing_players.any? %>
           <div class="textarea textarea-bordered border-red-400 min-h-[480px] w-full">
-            <% @validator.full_players.each do |raw| %>
+            <% @form.missing_players.each do |name| %>
               <div class="w-full relative">
-                <% if raw[:player].present? %>
-                  <div class="h-7 w-2"></div>
-                <% else %>
-                  <%= content_tag :div, class: "relative", data: {
-                controller: "autocomplete",
-                autocomplete_url_value: players_autocompletes_path,
-                action: "autocomplete.change->player-list-sync#copy"
-              }, role: "combobox" do %>
-                    <input type="text" class="input input-bordered w-full input-xs" data-autocomplete-target="input" value="<%= raw[:name] %>" />
-                    <input type="hidden" name="bird_id" data-autocomplete-target="hidden" />
-                    <ul class="list-group bg-red-100 absolute z-20 w-full" data-autocomplete-target="results" hidden="">
-                    </ul>
-                  <% end %>
+                <%= content_tag :div, class: "relative", data: {
+                  controller: "autocomplete",
+                  autocomplete_url_value: players_autocompletes_path,
+                  action: "autocomplete.change->player-list-sync#copy"
+                }, role: "combobox" do %>
+                  <input type="text" class="input input-bordered w-full input-xs" data-autocomplete-target="input" value="<%= name %>" />
+                  <input type="hidden" name="bird_id" data-autocomplete-target="hidden" />
+                  <ul class="list-group bg-red-100 absolute z-20 w-full" data-autocomplete-target="results" hidden="">
+                  </ul>
                 <% end %>
               </div>
             <% end %>
@@ -50,23 +65,27 @@
         <% end %>
       </div>
 
-      <%= form.submit "Generar", class: "btn mt-4" %>
+      <div class="flex items-end gap-3 my-4">
+        <%= form.submit "Generar", class: "btn" %>
+      </div>
     <% end %>
 
   </div>
 
-  <% if @random_team.teams.any? %>
+  <% if @game_day.teams.any? %>
     <% colors = ["#ff6f70", "#0076ff", "#393646"]  %>
 
+    <hr>
+
     <div class='grid grid-cols-3 gap-5 mt-6'>
-      <% @random_team.teams.each_with_index do |team, index| %>
+      <% @game_day.teams.each_with_index do |team, index| %>
         <div>
           <h3 class='font-semibold mb-1' style="color: <%= colors[index] %>">
-            Team <%= index + 1 %> - <span class='font-normal'><%= team.sum(&:level) %></span>
+            Team <%= index + 1 %> - <span class='font-normal'><%= team.sum { |p| p["level"] } %></span>
           </h3>
           <ol class='ml-4' style='list-style: decimal'>
-            <% team.sort_by(&:level).reverse.each do |player| %>
-              <li><%= player.name %> - <%= player.level %></li>
+            <% team.sort_by { |p| p["level"] }.reverse.each do |player| %>
+              <li><%= player["name"] %> - <%= player["level"] %></li>
             <% end %>
           </ol>
         </div>
@@ -74,3 +93,5 @@
     </div>
   <% end %>
 </div>
+
+<div class="mt-7"></div>
