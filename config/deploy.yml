@@ -6,7 +6,7 @@ image: condef5/m11
 
 # Deploy to these servers.
 servers:
-  - 65.21.243.59
+  - 135.181.206.195
 
 # Credentials for your image host.
 registry:
@@ -22,7 +22,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 65.21.243.59
+    DB_HOST: 135.181.206.195
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -39,13 +39,13 @@ env:
 #     - GITHUB_TOKEN
 #   remote:
 #     arch: amd64
-#     host: ssh://app@65.21.243.59
+#     host: ssh://app@135.181.206.195
 
 # Use accessory services (secrets come from .env).
 accessories:
   db:
     image: postgres:15
-    host: 65.21.243.59
+    host: 135.181.206.195
     port: 5432
     env:
       clear:
