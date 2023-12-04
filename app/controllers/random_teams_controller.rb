@@ -1,27 +1,38 @@
 class RandomTeamsController < ApplicationController
   def index
-    @random_team = RandomTeam.new(players_per_team: 7, list: session[:list] || "")
+    @game_day = GameDay.current
+    @form = RandomTeamForm.new(players_per_team: @game_day.players_per_team, list: @game_day.player_list)
+    @form.game_day = @game_day
   end
 
   def create
-    @random_team = RandomTeam.new(random_team_params)
-    session[:list] = @random_team.list
+    @form = RandomTeamForm.new(random_team_params)
+    @game_day = GameDay.current
+    @form.game_day = @game_day
+    @game_day.teams = []
 
-    if @random_team.missing_players.any?
-      flash.now[:error] = 'Missing players in the list.'
+    if @form.save
+      random_team = RandomTeam.new(
+        players: @game_day.players,
+        **random_team_params.except(:list).to_h.symbolize_keys
+      )
 
-      render :index, status: :unprocessable_entity
-    else
-      @random_team.generate!
-      flash.now[:success] = 'Random teams were successfully created.'
+      @teams = random_team.generate
 
-      render :index,  status: :unprocessable_entity
+      if @teams.any?
+        @game_day.save_teams_and_increase_attemps(@teams)
+        flash.now[:notice] = 'Se crearon equipos aleatorios con éxito.'
+      else
+        flash.now[:alert] = 'No se pudo generar los equipos, cambiar los parámetros e intentar de nuevo'
+      end
     end
+
+    render :index, status: :unprocessable_entity
   end
 
   private
 
   def random_team_params
-    params.require(:random_team).permit(:list, :players_per_team)
+    params.require(:random_team).permit(:list, :players_per_team, :max_generation_attemps, :gap)
   end
 end

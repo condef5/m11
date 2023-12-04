@@ -18,14 +18,14 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-spectre:
+player_one:
   level: 2
-  name: spectre
+  name: player one
 
-lucas:
+player_two:
   level: 5
-  name: lucas
+  name: player two
 
-spike:
+player_three:
   level: 2
-  name: spike
+  name: player three

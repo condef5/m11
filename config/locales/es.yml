@@ -30,6 +30,13 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 es:
+  activemodel:
+    models:
+      random_team_form: "Equipo aleatorio"
+    attributes:
+      random_team_form:
+        players_per_team: "N° de Jugadores"
+        max_generation_attemps: "N° de intentos"
   activerecord:
     success:
       create: "%{model} creado exitosamente."
@@ -56,7 +63,8 @@ es:
     your_profile: "Tu perfil"
     settings: "Configuración"
     players: "Jugadores"
-    create_team: "Crear equipo"
+    create_team: "Generar equipo"
+    game_day: "Equipo del día"
     sign_out: "Cerrar sesión"
   players:
     actions:

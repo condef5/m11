@@ -13,9 +13,8 @@
   <body>
     <div class="bg-white">
       <%= render "shared/header" %>
-      <main class="container max-w-[1080px] mx-auto mt-28 px-5">
-        <%= render 'shared/flash_messages' %>
-
+      <%= render 'shared/flash_messages' %>
+      <main class="container max-w-[1080px] mx-auto mt-8 px-5">
         <%= yield %>
       </main>
     </div>

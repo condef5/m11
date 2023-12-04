@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  resources :game_days
   root 'home#index'
+
+  namespace :players do
+    resources :autocompletes, only: :index
+  end
 
   resources :players
   resources :random_teams, only: %i[index create]

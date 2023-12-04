@@ -2,16 +2,19 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "./application";
 
-import Dropdown from 'stimulus-dropdown'
-application.register('dropdown', Dropdown)
+import Dropdown from "stimulus-dropdown";
+application.register("dropdown", Dropdown);
 
-import FormController from "./form_controller"
-application.register("form", FormController)
+import FormController from "./form_controller";
+application.register("form", FormController);
 
-import SelectController from "./select_controller"
-application.register("select", SelectController)
+import SelectController from "./select_controller";
+application.register("select", SelectController);
 
-import Notification from 'stimulus-notification'
-application.register('notification', Notification)
+import Autocomplete from "./autocomplete_controller";
+application.register("autocomplete", Autocomplete);
+
+import PlayerListSyncController from "./player_list_sync_controller";
+application.register("player-list-sync", PlayerListSyncController);

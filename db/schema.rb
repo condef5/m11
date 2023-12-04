@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_08_065114) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_01_065731) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "answers", id: false, force: :cascade do |t|
@@ -21,6 +22,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_08_065114) do
     t.integer "point"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "game_days", force: :cascade do |t|
+    t.text "player_list"
+    t.integer "players_per_team", default: 7
+    t.integer "generation_attempts", default: 1000
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "teams", default: [], null: false
   end
 
   create_table "player_connections", force: :cascade do |t|

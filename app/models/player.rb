@@ -31,5 +31,5 @@ class Player < ApplicationRecord
 
   include PgSearch::Model
 
-  pg_search_scope :search_name, against: :name, using: :trigram
+  pg_search_scope :search_name, against: :name, using: { trigram: { threshold: 0.2 } }
 end
