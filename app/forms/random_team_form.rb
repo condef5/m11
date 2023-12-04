@@ -21,10 +21,10 @@ class RandomTeamForm
   end
 
   def run_custom_validations
-    errors.add(:list, "Number of players must be greater than the players per team.") if players_per_team_greater_than_players?
-    errors.add(:players_per_team, "Number of players must be divisible by the players per team.") if non_divisible_players_per_team?
-    errors.add(:list, "Duplicated players") if duplicated_players.any?
-    errors.add(:list, "Missing players") if missing_players.any?
+    errors.add(:list, "debe ser mayor que los jugadores por equipo") if players_per_team_greater_than_players?
+    errors.add(:players_per_team, "debe ser divisible por el total de jugadores") if non_divisible_players_per_team?
+    errors.add(:list, "tiene duplicados") if duplicated_players.any?
+    errors.add(:list, "contiene jugadores no válidos") if missing_players.any?
   end
 
   def model_name
@@ -42,6 +42,8 @@ class RandomTeamForm
   end
 
   def missing_players
+    return [] if list.blank?
+
     present_player_names = present_players.map { |player| player.name.downcase }
     formatted_list.reject { |name| present_player_names.include?(name.downcase) }
   end

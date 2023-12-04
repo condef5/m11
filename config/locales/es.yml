@@ -35,8 +35,9 @@ es:
       random_team_form: "Equipo aleatorio"
     attributes:
       random_team_form:
-        players_per_team: "N° de Jugadores"
+        players_per_team: "N° de jugadores"
         max_generation_attemps: "N° de intentos"
+        list: "Lista de jugadores"
   activerecord:
     success:
       create: "%{model} creado exitosamente."

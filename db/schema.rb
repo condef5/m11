@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_065731) do
   create_table "game_days", force: :cascade do |t|
     t.text "player_list"
     t.integer "players_per_team", default: 7
-    t.integer "generation_attempts", default: 1000
+    t.integer "generation_attempts", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "teams", default: [], null: false

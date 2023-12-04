@@ -17,7 +17,7 @@ class RandomTeamFormTest < ActiveSupport::TestCase
     form.save
 
     assert_equal ["Frank"], form.duplicated_players
-    assert_equal ["Duplicated players"], form.errors[:list]
+    assert_equal ["tiene duplicados"], form.errors[:list]
   end
 
   test "validates the missing players" do
@@ -27,7 +27,7 @@ class RandomTeamFormTest < ActiveSupport::TestCase
     form.save
 
     assert_equal ["Lucas", "Nujabes"], form.missing_players
-    assert_equal ["Missing players"], form.errors[:list]
+    assert_equal ["contiene jugadores no válidos"], form.errors[:list]
   end
 
   test "validates players per team" do
@@ -36,7 +36,7 @@ class RandomTeamFormTest < ActiveSupport::TestCase
 
     form.save
 
-    assert_equal ["Number of players must be divisible by the players per team."], form.errors[:players_per_team]
+    assert_equal ["debe ser divisible por el total de jugadores"], form.errors[:players_per_team]
   end
 
   test "validates players per team should not bet greather than players" do
@@ -45,7 +45,7 @@ class RandomTeamFormTest < ActiveSupport::TestCase
 
     form.save
 
-    assert_equal ["Number of players must be greater than the players per team."], form.errors[:list]
+    assert_equal ["debe ser mayor que los jugadores por equipo"], form.errors[:list]
   end
 
   test "save list and player_per_team in game_day" do

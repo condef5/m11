@@ -37,7 +37,7 @@
             placeholder: "Lista de jugadores"
           %>
           <%= errors_helper(@form, :list) %>
-          <% if @form.duplicated_players.any? %>
+          <% if @game_day.player_list? && @form.duplicated_players.any? %>
             <div class="text-sm">
               <%= @form.duplicated_players.join(",") %>
             </div>
@@ -47,8 +47,9 @@
 
         <% if @form.missing_players.any? %>
           <div class="textarea textarea-bordered border-red-400 min-h-[480px] w-full">
+            <h2 class="text-orange-600">Jugadores no válidos</h2>
             <% @form.missing_players.each do |name| %>
-              <div class="w-full relative">
+              <div class="w-full relative mt-2">
                 <%= content_tag :div, class: "relative", data: {
                   controller: "autocomplete",
                   autocomplete_url_value: players_autocompletes_path,
