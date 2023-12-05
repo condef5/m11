@@ -9,6 +9,7 @@ class RandomTeamsController < ApplicationController
     @form = RandomTeamForm.new(random_team_params)
     @game_day = GameDay.current
     @form.game_day = @game_day
+    @game_day.update(player_list: random_team_params[:list], players_per_team: random_team_params[:players_per_team])
     @game_day.teams = []
 
     if @form.save

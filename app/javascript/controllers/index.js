@@ -4,17 +4,17 @@
 
 import { application } from "./application";
 
-import Dropdown from "stimulus-dropdown";
-application.register("dropdown", Dropdown);
+import AutocompleteController from "./autocomplete_controller";
+application.register("autocomplete", AutocompleteController);
 
 import FormController from "./form_controller";
 application.register("form", FormController);
 
+import PlayerListSyncController from "./player_list_sync_controller";
+application.register("player-list-sync", PlayerListSyncController);
+
 import SelectController from "./select_controller";
 application.register("select", SelectController);
 
-import Autocomplete from "./autocomplete_controller";
-application.register("autocomplete", Autocomplete);
-
-import PlayerListSyncController from "./player_list_sync_controller";
-application.register("player-list-sync", PlayerListSyncController);
+import Dropdown from "stimulus-dropdown";
+application.register("dropdown", Dropdown);

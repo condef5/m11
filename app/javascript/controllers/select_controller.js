@@ -24,7 +24,7 @@ export default class extends Controller {
         valueField: "id",
         labelField: "name",
         searchField: ["name", "level"],
-        maxItems: 2,
+        maxItems: 4,
         selectOnTab: true,
         placeholder: "Select",
         closeAfterSelect: true,
